@@ -33,6 +33,19 @@
 		  addLine(user + " 加入了群聊")
 		})
 
+		//接收到服务器发来的message事件
+		socket.on("message", function(msg) {
+		  addLine(msg)
+		})
+
+		//当发送按钮被点击时
+		$('form').submit(function () {
+		  var msg = $("#m").val() //获取用户恮的信息
+		  socket.emit("message", msg) //将消息发送给服务器
+		  $("#m").val("") //置空消息框
+		  return false //阻止form提交
+		})
+
 
 	    function addLine(msg) {
 	        $('#messages').append($('<li>').text(msg));
