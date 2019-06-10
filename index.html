@@ -22,7 +22,21 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-    	var socket = io()
+    	var name   = prompt("请输入你的昵称：");
+	    var socket = io()
+	    
+	    //发送昵称给后端
+	    socket.emit("join", name)
+
+	    //收到服务器发来的join事件时
+		socket.on("join", function (user) {
+		  addLine(user + " 加入了群聊")
+		})
+
+
+	    function addLine(msg) {
+	        $('#messages').append($('<li>').text(msg));
+	    }
     </script>
   </body>
 </html>
